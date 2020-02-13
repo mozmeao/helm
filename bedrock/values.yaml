@@ -1,0 +1,65 @@
+shared:
+    image:
+        version: master-ee817ba942b1ab9bbc2b26e34dd90e2985b872fc
+    env:
+        - name: AWS_DB_S3_BUCKET
+          value: bedrock-db-dev
+        - name: BASKET_URL
+          value: https://basket.allizom.org
+        - name: CLUSTER_NAME
+          value: iowa-a
+        - name: ALLOWED_HOSTS
+          value: "*"
+        - name: CSP_REPORT_ENABLE
+          value: "True"
+        - name: DEBUG
+          value: "False"
+        - name: DEV
+          value: "True"
+        - name: DISABLE_SSL
+          value: "False"
+        - name: ENABLE_CSP_MIDDLEWARE
+          value: "True"
+        - name: ENABLE_HOSTNAME_MIDDLEWARE
+          value: "True"
+        - name: GTM_CONTAINER_ID
+          value: GTM-MW3R8V
+        - name: HTTPS
+          value: "on"
+        - name: L10N_CRON
+          value: "True"
+        - name: LOGLEVEL
+          value: info
+        - name: MOFO_SECURITY_ADVISORIES_BRANCH
+          value: testing
+        - name: MOFO_SECURITY_ADVISORIES_PATH
+          value: /tmp/mofo_security_advisories
+        - name: PROD
+          value: "True"
+        - name: NEW_RELIC_APP_NAME
+          value: bedrock-dev-iowa-a;bedrock-dev
+        - name: RUN_SUPERVISOR
+          value: "True"
+        - name: SECURE_BROWSER_XSS_FILTER
+          value: "True"
+        - name: SECURE_HSTS_SECONDS
+          value: "31536000"
+        - name: SECURE_SSL_REDIRECT
+          value: "True"
+        - name: STATSD_CLIENT
+          value: django_statsd.clients.normal
+        - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
+          value: "False"
+
+clockdeployment:
+    replicas: 1
+    env:
+        - name: NEWRELIC_PYTHON_INI_FILE
+          value: newrelic.ini
+
+deployment:
+    replicas: 5
+    maxSurge: 3
+    env:
+        - name: CSP_DEFAULT_SRC
+          value: "*.allizom.org"

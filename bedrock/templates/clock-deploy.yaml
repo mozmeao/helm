@@ -1,0 +1,142 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: bedrock
+    type: clock
+  name: bedrock-clock
+spec:
+  replicas: {{ .Values.clockdeployment.replicas }}
+  selector:
+    matchLabels:
+      app: bedrock
+      type: clock
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: bedrock
+        type: clock
+      name: bedrock-clock
+    spec:
+      containers:
+      - args:
+        - ./bin/run-db-clock.sh
+        command:
+        - /bin/bash
+        - -c
+        env:
+        {{- range .Values.shared.env }}
+        - name: "{{ .name }}"
+          value: "{{ .value }}"
+        {{- end }}
+        {{- range .Values.clockdeployment.env }}
+        - name: "{{ .name }}"
+          value: "{{ .value }}"
+        {{- end }}
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: aws-access-key-id
+              name: bedrock-secrets
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: aws-secret-access-key
+              name: bedrock-secrets
+        - name: BASKET_API_KEY
+          valueFrom:
+            secretKeyRef:
+              key: basket-api-key
+              name: bedrock-secrets
+        - name: EMAIL_HOST
+          valueFrom:
+            secretKeyRef:
+              key: email-host
+              name: bedrock-secrets
+        - name: EMAIL_HOST_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: email-host-password
+              name: bedrock-secrets
+        - name: EMAIL_HOST_USER
+          valueFrom:
+            secretKeyRef:
+              key: email-host-user
+              name: bedrock-secrets
+        - name: EMAIL_PORT
+          valueFrom:
+            secretKeyRef:
+              key: email-port
+              name: bedrock-secrets
+        - name: EMAIL_USE_TLS
+          valueFrom:
+            secretKeyRef:
+              key: email-use-tls
+              name: bedrock-secrets
+        - name: NEW_RELIC_LICENSE_KEY
+          valueFrom:
+            secretKeyRef:
+              key: new-relic-license-key
+              name: bedrock-secrets
+        - name: POCKET_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: pocket-access-token
+              name: bedrock-secrets
+        - name: POCKET_CONSUMER_KEY
+          valueFrom:
+            secretKeyRef:
+              key: pocket-consumer-key
+              name: bedrock-secrets
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: bedrock-secrets
+        - name: SENTRY_DSN
+          valueFrom:
+            secretKeyRef:
+              key: sentry-dsn
+              name: bedrock-secrets
+        - name: TWITTER_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: twitter-access-token
+              name: bedrock-secrets
+        - name: TWITTER_ACCESS_TOKEN_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: twitter-access-token-secret
+              name: bedrock-secrets
+        - name: TWITTER_CONSUMER_KEY
+          valueFrom:
+            secretKeyRef:
+              key: twitter-consumer-key
+              name: bedrock-secrets
+        - name: TWITTER_CONSUMER_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: twitter-consumer-secret
+              name: bedrock-secrets
+        image: "mozorg/bedrock:{{ .Values.shared.image.version }}"
+        imagePullPolicy: IfNotPresent
+        name: bedrock-clock
+        resources:
+          limits:
+            cpu: 500m
+            memory: 300Mi
+          requests:
+            cpu: 250m
+            memory: 120Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
