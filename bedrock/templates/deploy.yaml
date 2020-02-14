@@ -113,7 +113,7 @@ spec:
             secretKeyRef:
               key: twitter-consumer-secret
               name: bedrock-secrets
-        image: "mozorg/bedrock:{{ .Values.shared.image.version }}"
+        image: "{{ .Values.shared.image.dockerrepo }}:{{ .Values.shared.image.version }}"
         imagePullPolicy: IfNotPresent
         name: bedrock-web
         ports:
