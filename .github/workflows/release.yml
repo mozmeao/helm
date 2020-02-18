@@ -13,10 +13,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      # - name: Configure Git
-      #   run: |
-      #     git config user.name "mozmeao-helm"
-      #     git config user.email "mozmeao-helm@users.noreply.github.com"
+      - name: Configure Git
+        run: |
+          git config user.name "mozmeao-helm"
+          git config user.email "mozmeao-helm@users.noreply.github.com"
 
       - name: Build helm packages
         run: |
@@ -26,3 +26,9 @@ jobs:
           mv bedrock*.tgz docs
           ls docs
           helm repo index docs/ --url https://mozmeao.github.io/helm
+          git add .
+          git commit -m "publishing changes to master"
+
+      - uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.CR_TOKEN }}
