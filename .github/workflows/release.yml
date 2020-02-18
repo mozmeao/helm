@@ -26,8 +26,6 @@ jobs:
           mv bedrock*.tgz docs
           ls docs
           helm repo index docs/ --url https://mozmeao.github.io/helm
-          git add .
-          git commit -m "publishing changes to master"
 
       - uses: mikeal/publish-to-github-action@master
         env:
