@@ -10,3 +10,4 @@ Then create an index file of the charts:
 `helm repo index docs/ --url https://mozmeao.github.io/helm`
 Then do the typical git add/git commit/git push pattern
 
+# Working on making github actions do the above
