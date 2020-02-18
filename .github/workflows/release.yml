@@ -23,4 +23,6 @@ jobs:
           curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
           helm version
           helm package charts/bedrock
+          mv bedrock*.tgz docs
+          ls docs
           helm repo index docs/ --url https://mozmeao.github.io/helm
