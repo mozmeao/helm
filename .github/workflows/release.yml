@@ -3,6 +3,7 @@ name: Release Charts
 on:
   push:
     branches:
+      - test
       - master
 
 jobs:
@@ -12,12 +13,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Configure Git
-        run: |
-          git config user.name "mozmeao-helm"
-          git config user.email "mozmeao-helm@users.noreply.github.com"
+      # - name: Configure Git
+      #   run: |
+      #     git config user.name "mozmeao-helm"
+      #     git config user.email "mozmeao-helm@users.noreply.github.com"
 
-      - name: Run chart-releaser
-        uses: duallain/chart-releaser-action@0.0.6
-        env:
-          CR_TOKEN: "${{ secrets.CR_TOKEN }}"
+      - name: Build helm packages
+        uses: J12934/helm-gh-pages-action@master
