@@ -20,5 +20,6 @@ jobs:
 
       - name: Build helm packages
         run: |
+          helm version
           helm package charts/bedrock
           helm repo index docs/ --url https://mozmeao.github.io/helm
