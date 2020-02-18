@@ -17,7 +17,15 @@ jobs:
           git config user.name "mozmeao-helm"
           git config user.email "mozmeao-helm@users.noreply.github.com"
 
-      - name: Run chart-releaser
-        uses: duallain/chart-releaser-action@0.0.6
+      - name: Build helm packages
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+          helm version
+          helm package charts/bedrock
+          mv bedrock*.tgz docs
+          ls docs
+          helm repo index docs/ --url https://mozmeao.github.io/helm
+
+      - uses: mikeal/publish-to-github-action@master
         env:
-          CR_TOKEN: "${{ secrets.CR_TOKEN }}"
+          GITHUB_TOKEN: ${{ secrets.CR_TOKEN }}
