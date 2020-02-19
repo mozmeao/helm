@@ -3,9 +3,9 @@ entries:
   bedrock:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-02-19T00:56:43.202857282Z"
+    created: "2020-02-19T00:57:17.63203882Z"
     description: A Helm chart the Bedrock Application
-    digest: 9302c955f78745746e391dc63389ae227ef6d68afcd67eb215dd2d5bd8f1ca17
+    digest: e842b91728361ea9a59bf57ef2b38b14e68b6d9004fdc075f13abf747fdc24cb
     name: bedrock
     type: application
     urls:
@@ -13,7 +13,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-02-19T00:56:43.201597345Z"
+    created: "2020-02-19T00:57:17.631468518Z"
     description: A Helm chart the Bedrock Application
     digest: 95af62bfe0abd3dbc06db0eabe7deffb15e1a3cdfb73720e2a6e5aafe33ca605
     name: bedrock
@@ -23,7 +23,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-02-19T00:56:43.200452912Z"
+    created: "2020-02-19T00:57:17.630880517Z"
     description: A Helm chart the Bedrock Application
     digest: 2fc7bb05fdbb473ee3bd55ce94dc0af29d17dfc36b328c35efae687f9ac74d8b
     name: bedrock
@@ -31,4 +31,4 @@ entries:
     urls:
     - https://mozmeao.github.io/helm/bedrock-0.1.0.tgz
     version: 0.1.0
-generated: "2020-02-19T00:56:43.198942968Z"
+generated: "2020-02-19T00:57:17.629789714Z"
