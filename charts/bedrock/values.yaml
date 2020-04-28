@@ -1,7 +1,7 @@
 shared:
     image:
         version: master-ee817ba942b1ab9bbc2b26e34dd90e2985b872fc
-        dockerrepo: mozorg/bedroc
+        dockerrepo: mozorg/bedrock
     env:
         - name: AWS_DB_S3_BUCKET
           value: bedrock-db-dev
