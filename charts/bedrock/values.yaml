@@ -53,7 +53,7 @@ shared:
           value: "False"
 
 clockdeployment:
-    replicas: 1
+    replicas: 0
     env:
         - name: NEWRELIC_PYTHON_INI_FILE
           value: newrelic.ini
